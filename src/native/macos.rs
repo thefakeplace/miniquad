@@ -11,6 +11,7 @@ use {
         },
         Context, CursorIcon, GraphicsContext,
     },
+    core_graphics::display::CGDisplay,
     std::{collections::HashMap, os::raw::c_void},
 };
 
@@ -46,8 +47,10 @@ impl crate::native::NativeDisplay for MacosDisplay {
     fn cancel_quit(&mut self) {
         self.data.quit_requested = false;
     }
-
-    fn set_cursor_grab(&mut self, _grab: bool) {}
+    fn set_cursor_grab(&mut self, grab: bool) {
+        CGDisplay::associate_mouse_and_mouse_cursor_position(!grab)
+            .expect("failed to lock mouse cursor");
+    }
     fn show_mouse(&mut self, show: bool) {
         if show && !self.cursor_shown {
             unsafe {
