@@ -116,6 +116,10 @@ impl crate::native::NativeDisplay for MacosDisplay {
     fn as_any(&mut self) -> &mut dyn std::any::Any {
         self
     }
+    fn get_mouse_delta(&self) -> Option<(f32, f32)> {
+        let result = CGDisplay::get_last_mouse_delta();
+        Some((result.0 as f32, result.1 as f32))
+    }
 }
 
 impl MacosDisplay {

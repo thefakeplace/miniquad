@@ -158,6 +158,10 @@ impl Context {
     pub fn show_keyboard(&mut self, show: bool) {
         self.display_mut().show_keyboard(show)
     }
+
+    pub fn get_mouse_delta(&self) -> Option<(f32, f32)> {
+        self.display().get_mouse_delta()
+    }
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Hash, Eq)]

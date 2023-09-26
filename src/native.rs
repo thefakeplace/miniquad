@@ -51,6 +51,9 @@ pub trait NativeDisplay: std::any::Any {
     fn show_keyboard(&mut self, _show: bool) {}
 
     fn as_any(&mut self) -> &mut dyn std::any::Any;
+    fn get_mouse_delta(&self) -> Option<(f32, f32)> {
+        None
+    }
 }
 
 pub mod module;
